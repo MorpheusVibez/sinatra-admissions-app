@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "student_admin"
   end
 
   get "/" do
@@ -17,8 +19,8 @@ class ApplicationController < Sinatra::Base
       #returns true if the current user is logged in
     end 
     
-    def current_user
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    def current_student
+      @current_student ||= Student.find(session[:user_id]) if session[:user_id]
       #if current user doesn't exist, then go find it
     end
     
