@@ -8,3 +8,4 @@ use Rack::MethodOverride #to send patch and delete requests
 
 #to run application and other controllers
 run ApplicationController
+run StudentsController
