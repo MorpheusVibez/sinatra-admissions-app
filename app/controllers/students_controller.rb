@@ -7,12 +7,33 @@ class StudentsController < ApplicationController
             redirect to '/courses' 
         end
     end
+
+    post '/signup' do
+        if params[:name] == "" || params[:email] == "" || params[:password] == ""
+            redirect to '/signup'
+        else
+            @student = Student.new(name: params[:name], email: params[:email], password: params[:password])
+            @Student.save
+            session[:user_id] = @student.id 
+            redirect to '/courses'
+        end
+    end
     
     get '/login' do
         if !logged_in?
             erb :'/students/login'
         else
             redirect to '/courses'
+        end
+    end
+
+    post '/login' do
+        student = Student.find_by(email: params[:email])
+        if student && student.authenticate(params[:password])
+            session[:user_id] = student.id
+            redirect "/courses"
+        else
+            redirect "/signup"
         end
     end
 
