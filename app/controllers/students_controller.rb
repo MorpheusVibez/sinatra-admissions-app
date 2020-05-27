@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
             redirect to '/signup'
         else
             @student = Student.new(name: params[:name], email: params[:email], password: params[:password])
-            @Student.save
+            @student.save
             session[:user_id] = @student.id 
             redirect to '/courses'
         end
