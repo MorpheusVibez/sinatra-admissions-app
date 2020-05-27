@@ -7,5 +7,6 @@ end
 use Rack::MethodOverride #to send patch and delete requests
 
 #to run application and other controllers
+use StudentsController
+use CoursesController
 run ApplicationController
-run StudentsController

@@ -1,1 +1,8 @@
-Courses Page
+<h2>Welcome, <%= @current_user.name%></h2>
+<h3>Courses</h3>
+
+<%@courses.each do |c|%>
+    <div>
+        <%=c.name%>
+    </div>
+<%end%>
