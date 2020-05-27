@@ -28,9 +28,9 @@ class StudentsController < ApplicationController
     end
 
     post '/login' do
-        binding.pry
-        @student = Student.find_by(email: params[:email])
-        if @student.authenticate(params[:password])
+        student = Student.find_by(email: params[:email])
+        if student.authenticate(params[:password])
+            # binding.pry
             session[:user_id] = student.id
             redirect "/courses"
         else
