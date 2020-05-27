@@ -23,16 +23,15 @@ class StudentsController < ApplicationController
         if !logged_in?
             erb :'/students/login'
         else
-            redirect to '/courses'
+            redirect "/courses"
         end
     end
 
     post '/login' do
         student = Student.find_by(email: params[:email])
         if student.authenticate(params[:password])
-            # binding.pry
             session[:user_id] = student.id
-            redirect "/courses"
+            redirect "/courses/#{student.id}"
         else
             redirect "/signup"
         end

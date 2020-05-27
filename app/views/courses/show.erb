@@ -1,0 +1,8 @@
+<p><%= @course.name %>
+
+<form method="post" action="/courses/<%=@tweet.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Unenroll from course">
+</form>
+
+<a href="/courses/<%=@courses.id%>/edit">Edit Tweet </a>

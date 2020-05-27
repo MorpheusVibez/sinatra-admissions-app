@@ -18,7 +18,12 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/:id' do
-        
+        if logged_in?
+            @courses = Course.find_by_id(params[:id])
+            erb :'courses/show'
+        else
+            redirect to '/login'
+        end
     end
 
     get '/courses/:id/edit' do
