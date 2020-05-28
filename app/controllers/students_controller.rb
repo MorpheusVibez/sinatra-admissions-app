@@ -4,8 +4,8 @@ class StudentsController < ApplicationController
         if !logged_in?
             erb :'students/signup'
         elsif logged_in?
-            @student = session[:user_id]
-            redirect to "/students/#{@student}" 
+            student = session[:user_id]
+            redirect to "/students/#{student.id}" 
         end
     end
 
@@ -13,8 +13,9 @@ class StudentsController < ApplicationController
         if params[:name] == "" || params[:email] == "" || params[:password] == ""
             redirect to '/signup'
         else
-            @student = Student.create(params)
-            session[:user_id] = @student.id 
+            student = Student.create(params)
+            session[:user_id] = student.id
+            binding.pry
             redirect to "/students/#{student.id}"
         end
     end
@@ -28,12 +29,14 @@ class StudentsController < ApplicationController
     end
 
     post '/login' do
+        # binding.pry
         student = Student.find_by(email: params[:email])
-        if student.authenticate(params[:password])
+        if student == nil
+            redirect "/signup"
+        else
+            student.authenticate(params[:password])
             session[:user_id] = student.id
             redirect "/students/#{student.id}"
-        else
-            redirect "/signup"
         end
     end
 
