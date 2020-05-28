@@ -1,6 +1,6 @@
 <%# Index Route %>
 <h2>Welcome, <%= @current_student.name%></h2>
-<h3>Here are the classes you are enrolled in:</h3>
+<h3>Here are the current classes you can enroll in:</h3>
 
 
 
@@ -9,3 +9,6 @@
         <%=c.name%>
     </div>
 <%end%>
+<br>
+<p> Select here to add a course to your profile: </p>
+<a href="/courses/new">Add Course</a>
