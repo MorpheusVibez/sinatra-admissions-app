@@ -31,7 +31,6 @@ class CoursesController < ApplicationController
                 @course.save
                 redirect to "/courses/#{@course.id}"
               else
-                
                 redirect to "/students/#{@course.user_id}"
               end
             end 
@@ -65,10 +64,33 @@ class CoursesController < ApplicationController
     end
 
     patch '/courses/:id' do
-        
+      if logged_in?
+        @courses = Course.find_by_id(params[:id])
+        if params[:name] == "" || params[:description] == ""
+          redirect to "/courses/#{@courses.id}/edit"
+        else
+          @courses = Course.find_by_id(params[:id])
+          #@student = session[:user_id]
+            if @course.update(name: params[:name], description: params[:description])
+              redirect to "/courses/#{@courses.id}"
+            else
+              redirect to "/courses/#{@courses.id}/edit"
+            end
+        end
+      else
+        redirect to "/login"
+      end
     end
 
     delete '/courses/:id/delete' do
-        
+      if logged_in?
+        @courses = Course.find_by_id(params[:id])
+        if @student == current_student and @courses = @courses
+          @courses.delete
+        end
+        redirect to '/signup'
+      else
+        redirect to '/login'
+      end
     end
 end
