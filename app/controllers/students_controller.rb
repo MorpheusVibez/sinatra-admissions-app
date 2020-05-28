@@ -9,12 +9,10 @@ class StudentsController < ApplicationController
     end
 
     post '/signup' do
-        binding.pry
         if params[:name] == "" || params[:email] == "" || params[:password] == ""
             redirect to '/signup'
         else
-            @student = Student.new(name: params[:name], email: params[:email], password: params[:password])
-            @student.save
+            @student = Student.create(params)
             session[:user_id] = @student.id 
             redirect to '/courses'
         end
@@ -45,6 +43,36 @@ class StudentsController < ApplicationController
         else
             redirect to "/"
         end
+    end
+
+    get '/students/:id' do
+        if logged_in?
+            @courses = Course.find_by_id(params[:id])
+            erb :'courses/show'
+        else
+            redirect to '/login'
+        end
+    end
+
+    get '/students/:id/edit' do
+        if logged_in?
+            @courses = Course.find_by_id(params[:id])
+            if @courses && @courses.user_id == current_student
+              erb :'/courses/edit'
+            else
+              redirect to '/courses'
+            end
+          else
+            redirect to '/login'
+          end
+    end
+
+    patch '/students/:id' do
+        
+    end
+
+    delete '/students/:id/delete' do
+        
     end
 
 end
