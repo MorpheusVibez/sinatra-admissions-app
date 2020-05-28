@@ -21,17 +21,17 @@ class CoursesController < ApplicationController
     post '/courses' do
       
         if logged_in?
-            if params == ""
+            if params == {name: "", description: ""}
               redirect to "/courses/new"
             else
+
               @course = Course.new(params)
               if @course.save
-                binding.pry
                 @course.user_id = current_student.id
-                redirect to "/students/#{@course.user_id}"
+                redirect to "/courses"
               else
                 
-                redirect to "/courses/"
+                redirect to "/students/#{@course.user_id}"
               end
             end 
           else

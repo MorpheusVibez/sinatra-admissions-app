@@ -1,14 +1,10 @@
 <h2>Hello, <%= @current_student.name%></h2>
-<h3>Please select a course you would like to enroll in or create your own:</h3>
 
 
-<form method="POST" action="/courses">
-<% Course.all.each do |c| %>
-    <input type="checkbox" name="Name" id="<%= c.name %>" value="<%= c.name %>"><%= c.name %> <br> <%= c.description %></input>
-    <br> <br>
-  <% end %>
-</form>
-<br> <br>
+<h3>Please enter a new course you would like to enroll in:</h3>
+
+
+
 
 <form method="POST" action="/courses">
   
