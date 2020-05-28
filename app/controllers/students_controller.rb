@@ -9,6 +9,7 @@ class StudentsController < ApplicationController
     end
 
     post '/signup' do
+        binding.pry
         if params[:name] == "" || params[:email] == "" || params[:password] == ""
             redirect to '/signup'
         else
