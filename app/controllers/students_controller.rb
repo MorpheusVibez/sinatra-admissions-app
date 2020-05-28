@@ -90,7 +90,7 @@ class StudentsController < ApplicationController
     delete '/students/:id/delete' do
         if logged_in?
             @student = Student.find_by_id(params[:id])
-            if @student && @student.user == current_user
+            if @student == current_user
               @student.delete
             end
             redirect to '/signup'
