@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
 
     get '/courses/new' do
         if logged_in?
-            erb :'/courses/select_courses'
+            erb :'/courses/new'
           else
             redirect to '/login'
           end
@@ -28,7 +28,7 @@ class CoursesController < ApplicationController
               else
                 redirect to "/courses/new"
               end
-            end
+            end 
           else
             redirect to '/login'
           end
@@ -45,7 +45,16 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/:id/edit' do
-        
+        if logged_in?
+            @courses = Course.find_by_id(params[:id])
+            if @courses && @courses.user_id == current_student
+              erb :'/courses/edit'
+            else
+              redirect to '/courses'
+            end
+          else
+            redirect to '/login'
+          end
     end
 
     patch '/courses/:id' do

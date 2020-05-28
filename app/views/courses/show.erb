@@ -1,8 +1,10 @@
-<p><%= @course.description%>
+<h2>Welcome, <%= @current_student.name%></h2>
+<h3>Here are the classes you are enrolled in:</h3>
 
-<form method="post" action="/courses/<%=@course.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Unenroll from course">
-</form>
 
-<a href="/courses/<%=@courses.id%>/edit">Edit course </a>
+
+<%@courses.each do |c|%>
+    <div>
+        <%=c.name%>
+    </div>
+<%end%>
