@@ -3,8 +3,9 @@ class StudentsController < ApplicationController
     get '/signup' do
         if !logged_in?
             erb :'students/signup'
-        else
-            redirect to "/students/#{student.id}" 
+        elsif logged_in?
+            @student = session[:user_id]
+            redirect to "/students/#{@student}" 
         end
     end
 
@@ -69,17 +70,19 @@ class StudentsController < ApplicationController
 
     patch '/students/:id' do
         if logged_in?
+            @student = Student.find_by_id(params[:id])
             if params[:name] == "" || params[:email] == ""
-              redirect to "/students/#{student.id}/edit"
+              redirect to "/students/#{@student.id}/edit"
             else
               @student = Student.find_by_id(params[:id])
-              if @student && @student.user == current_user
+              if @student && @student.id == current_student
                 if @student.update(name: params[:name]) || @student.update(email: params[:email])
                   redirect to "/students/#{@student.id}"
                 else
                   redirect to "/students/#{@student.id}/edit"
                 end
               else
+                binding.pry
                 redirect to '/signup'
               end
             end
