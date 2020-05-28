@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
     end 
     
     def current_student
-      @current_student ||= Student.find(session[:user_id]) if session[:user_id]
+      @current_student ||= Student.find_by(id: session[:user_id]) if session[:user_id]
       #if current user doesn't exist, then go find it
     end
     
