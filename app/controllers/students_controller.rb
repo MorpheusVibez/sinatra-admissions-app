@@ -60,8 +60,7 @@ class StudentsController < ApplicationController
             if @student.id == params[:id].to_i
               erb :'/students/edit'
             else
-                binding.pry
-              redirect to '/students'
+              redirect to '/signup'
             end
           else
             redirect to '/login'
