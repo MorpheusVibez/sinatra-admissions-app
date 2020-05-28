@@ -24,11 +24,12 @@ class CoursesController < ApplicationController
             if params == {name: "", description: ""}
               redirect to "/courses/new"
             else
-
+              binding.pry
               @course = Course.new(params)
               if @course.save
                 @course.user_id = current_student.id
-                redirect to "/courses"
+                @course.save
+                redirect to "/courses/#{@course.id}"
               else
                 
                 redirect to "/students/#{@course.user_id}"
@@ -43,7 +44,7 @@ class CoursesController < ApplicationController
     get '/courses/:id' do
       
         if logged_in?
-            @courses = Course.find_by_id(params[:id])
+            @course = Course.find_by_id(params[:id])
             erb :'courses/show'
         else
             redirect to '/login'

@@ -2,9 +2,12 @@
 <h3>Here are the classes you are enrolled in:</h3>
 
 
-
-<%@courses.each do |c|%>
+<%=binding.pry%>
+<%Course.all.each do |c|%>
     <div>
+    <%if c.user_id == @current_student.id%>
         <%=c.name%>
+
+    <%end%>
     </div>
 <%end%>
