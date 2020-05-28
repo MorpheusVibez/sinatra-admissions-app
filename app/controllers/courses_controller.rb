@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/new' do
+      binding.pry
         if logged_in?
             erb :'/courses/new'
           else
@@ -18,16 +19,17 @@ class CoursesController < ApplicationController
     end
 
     post '/courses' do
-      binding.pry
+     
         if logged_in?
             if params == ""
               redirect to "/courses/new"
             else
-              @courses = current_student.courses.build(params)
+              @courses = current_student.course.build(params)
               if @courses.save
-                redirect to "/courses/#{@courses.id}"
+                redirect to "/students/#{@courses.id}"
               else
-                redirect to "/courses/new"
+                
+                redirect to "/courses/"
               end
             end 
           else
@@ -37,6 +39,7 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/:id' do
+      
         if logged_in?
             @courses = Course.find_by_id(params[:id])
             erb :'courses/show'
