@@ -47,8 +47,8 @@ class StudentsController < ApplicationController
 
     get '/students/:id' do
         if logged_in?
-            @courses = Course.find_by_id(params[:id])
-            erb :'courses/show'
+            @student = Student.find_by_id(params[:id])
+            erb :'students/show'
         else
             redirect to '/login'
         end
@@ -56,11 +56,11 @@ class StudentsController < ApplicationController
 
     get '/students/:id/edit' do
         if logged_in?
-            @courses = Course.find_by_id(params[:id])
-            if @courses && @courses.user_id == current_student
-              erb :'/courses/edit'
+            @student = Student.find_by_id(params[:id])
+            if @student && @student.user_id == current_student
+              erb :'/students/edit'
             else
-              redirect to '/courses'
+              redirect to '/students'
             end
           else
             redirect to '/login'
