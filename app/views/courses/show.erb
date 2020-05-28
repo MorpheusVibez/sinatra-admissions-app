@@ -1,13 +1,14 @@
 <h2>Welcome, <%= @current_student.name%></h2>
-<h3>Here are the classes you are enrolled in:</h3>
+<h3>Here is are your new classes:</h3>
 
 
 
 <%Course.all.each do |c|%>
     <div>
     <%if c.user_id == @current_student.id%>
-        <%=c.name%>
-
+        <h4><%=c.name%></h4>
+    <br>
+        <p><%=c.description%></p>
     <%end%>
     </div>
 <%end%>

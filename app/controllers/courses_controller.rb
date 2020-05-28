@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
             if params == {name: "", description: ""}
               redirect to "/courses/new"
             else
-              binding.pry
+              
               @course = Course.new(params)
               if @course.save
                 @course.user_id = current_student.id
@@ -51,9 +51,10 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/:id/edit' do
+      
         if logged_in?
             @courses = Course.find_by_id(params[:id])
-            if @courses && @courses.user_id == current_student
+            if @courses && @courses.user_id == current_student.id
               erb :'/courses/edit'
             else
               redirect to '/courses'
@@ -70,8 +71,8 @@ class CoursesController < ApplicationController
           redirect to "/courses/#{@courses.id}/edit"
         else
           @courses = Course.find_by_id(params[:id])
-          #@student = session[:user_id]
-            if @course.update(name: params[:name], description: params[:description])
+          # binding.pry
+            if @courses.update(name: params[:name], description: params[:description])
               redirect to "/courses/#{@courses.id}"
             else
               redirect to "/courses/#{@courses.id}/edit"
@@ -83,6 +84,7 @@ class CoursesController < ApplicationController
     end
 
     delete '/courses/:id/delete' do
+      binding.pry
       if logged_in?
         @courses = Course.find_by_id(params[:id])
         if @student == current_student and @courses = @courses

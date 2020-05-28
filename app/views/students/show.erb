@@ -8,6 +8,15 @@
         <h4>Email:</h4>
         <%=@student.email%>
         <br> <br>
+
+        <%Course.all.each do |c|%>
+    <div>
+    <%if c.user_id == @current_student.id%>
+        <%=c.name%>
+
+    <%end%>
+    </div>
+<%end%>
     </ol>
 
 <br> <br>
