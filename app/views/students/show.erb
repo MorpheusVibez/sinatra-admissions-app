@@ -8,7 +8,7 @@
         <h4>Email:</h4>
         <%=@student.email%>
         <br> <br>
-
+        <h4>Classes:</h4>
         <%Course.all.each do |c|%>
     <div>
     <%if c.user_id == @current_student.id%>
@@ -19,6 +19,8 @@
 <%end%>
     </ol>
 
+<br> <br>
+<a href="/courses">Courses</a>
 <br> <br>
 <a href="/students/<%=@student.id%>/edit">Edit Profile</a>
 <br> <br>
