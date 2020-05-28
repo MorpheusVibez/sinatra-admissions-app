@@ -75,20 +75,16 @@ class StudentsController < ApplicationController
               redirect to "/students/#{@student.id}/edit"
             else
               @student = Student.find_by_id(params[:id])
-              if @student && @student.id == current_student
-                if @student.update(name: params[:name]) || @student.update(email: params[:email])
+              #@student = session[:user_id]
+                if @student.update(name: params[:name], email: params[:email])
                   redirect to "/students/#{@student.id}"
                 else
                   redirect to "/students/#{@student.id}/edit"
                 end
-              else
-                binding.pry
-                redirect to '/signup'
-              end
             end
-          else
-            redirect to '/login'
-          end
+        else
+            redirect to "/login"
+        end
     end
 
     delete '/students/:id/delete' do
