@@ -57,9 +57,10 @@ class StudentsController < ApplicationController
     get '/students/:id/edit' do
         if logged_in?
             @student = Student.find_by_id(params[:id])
-            if @student && @student.user_id == current_student
+            if @student.id == params[:id].to_i
               erb :'/students/edit'
             else
+                binding.pry
               redirect to '/students'
             end
           else
