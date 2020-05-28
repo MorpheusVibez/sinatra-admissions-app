@@ -1,1 +1,10 @@
-Students show page
+<h2>Welcome, <%= @current_student.name%></h2>
+<h3>Profile Info:</h3>
+
+    <ol>
+        <h4>Name:</h4>
+        <%=@student.name%>
+        <br> <br>
+        <h4>Email:</h4>
+        <%=@student.email%>
+    </ol>
