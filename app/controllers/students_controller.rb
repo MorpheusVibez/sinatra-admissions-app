@@ -15,7 +15,7 @@ class StudentsController < ApplicationController
         else
             student = Student.create(params)
             session[:user_id] = student.id
-            binding.pry
+            # binding.pry
             redirect to "/students/#{student.id}"
         end
     end
