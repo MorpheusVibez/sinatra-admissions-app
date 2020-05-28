@@ -68,11 +68,36 @@ class StudentsController < ApplicationController
     end
 
     patch '/students/:id' do
-        
+        if logged_in?
+            if params[:name] == "" || params[:email] == ""
+              redirect to "/students/#{student.id}/edit"
+            else
+              @student = Student.find_by_id(params[:id])
+              if @student && @student.user == current_user
+                if @student.update(name: params[:name]) || @student.update(email: params[:email])
+                  redirect to "/students/#{@student.id}"
+                else
+                  redirect to "/students/#{@student.id}/edit"
+                end
+              else
+                redirect to '/signup'
+              end
+            end
+          else
+            redirect to '/login'
+          end
     end
 
     delete '/students/:id/delete' do
-        
+        if logged_in?
+            @student = Student.find_by_id(params[:id])
+            if @student && @student.user == current_user
+              @student.delete
+            end
+            redirect to '/signup'
+          else
+            redirect to '/login'
+          end
     end
 
 end
