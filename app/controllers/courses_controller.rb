@@ -52,7 +52,7 @@ class CoursesController < ApplicationController
 
     get '/courses/:id/edit' do
         set_course
-        binding.pry
+        # binding.pry
         if logged_in?
             if @course.user_id == current_student.id
              
