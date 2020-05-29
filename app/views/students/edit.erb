@@ -2,7 +2,9 @@
 
 <form method="post" action="/students/<%=@student.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <label for="name">Name:</label>
   <input type="text" name="name" value="<%=@student.name%>">
+  <label for="email">Email:</label>
   <input type="text" name="email" value="<%=@student.email%>">
   <input type="submit" value="submit">
 </form>

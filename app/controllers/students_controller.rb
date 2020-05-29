@@ -51,7 +51,7 @@ class StudentsController < ApplicationController
 
     get '/students/:id' do
         if logged_in?
-            @student = Student.find_by_id(params[:id])
+            set_student
             erb :'students/show'
         else
             redirect to '/login'
@@ -60,7 +60,7 @@ class StudentsController < ApplicationController
 
     get '/students/:id/edit' do
         if logged_in?
-            @student = Student.find_by_id(params[:id])
+            set_student
             if @student.id == params[:id].to_i
               erb :'/students/edit'
             else
@@ -73,11 +73,11 @@ class StudentsController < ApplicationController
 
     patch '/students/:id' do
         if logged_in?
-            @student = Student.find_by_id(params[:id])
+            set_student
             if params[:name] == "" || params[:email] == ""
               redirect to "/students/#{@student.id}/edit"
             else
-              @student = Student.find_by_id(params[:id])
+                set_student
               #@student = session[:user_id]
                 if @student.update(name: params[:name], email: params[:email])
                   redirect to "/students/#{@student.id}"
@@ -92,8 +92,8 @@ class StudentsController < ApplicationController
 
     delete '/students/:id/delete' do
         if logged_in?
-            @student = Student.find_by_id(params[:id])
-            if @student == current_user
+            set_student
+            if @student == current_student
               @student.delete
             end
             redirect to '/signup'
@@ -101,5 +101,12 @@ class StudentsController < ApplicationController
             redirect to '/login'
           end
     end
+
+    private
+
+    def set_student
+        @student = Student.find_by_id(params[:id])
+    end
+
 
 end
