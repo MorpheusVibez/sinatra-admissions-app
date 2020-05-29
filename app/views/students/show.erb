@@ -12,7 +12,7 @@
         <%Course.all.each do |c|%>
     <div>
     <%if c.user_id == @current_student.id%>
-        <%=c.name%>
+        <a href="/courses/<%=c.id%>"><%=c.name%></a>
 
     <%end%>
     </div>

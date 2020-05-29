@@ -2,13 +2,13 @@
 <h2>Welcome, <%= @current_student.name%></h2>
 <a href="/students/<%=@current_student.id%>">Back to Profile</a
 <br>
-<h3>Here are the current classes:</h3>
+<h3>Here are the current classes available:</h3>
 
 
 
 <%@course.each do |c|%>
     <div>
-        <%=c.name%>
+        <a href="/courses/<%=c.id%>"><%=c.name%></a>
     </div>
 <%end%>
 <br>
