@@ -6,16 +6,18 @@
     <div>
     <%Course.all.each do |c|%>
         <h4><%=c.name%></h4>
-    <br>
+   
         <p><%=c.description%></p>
-    </div>
+    
     <%end%>
 <%else%>
+
     <h4>You Are Not Enrolled!</h4>
     
 <%end%>
 
 <br>
 
-<a href="/courses/new">Add Course</a>
+<a href="/courses/new">Add New Course</a>
 <a href="/courses/<%=@course.id%>/edit">Edit Course</a>
+<a href="/students/<%=@student.id%>">Profile</a>
