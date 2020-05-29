@@ -1,10 +1,12 @@
 <h2>Hello, <%= @current_student.name%></h2>
 
+<%@course.each do |c|%>
+    <div>
+        <a href="/courses/<%=c.id%>"><%=c.name%></a>
+    </div>
+<%end%>
 
 <h3>Please enter a new course you would like to enroll in:</h3>
-
-
-
 
 <form method="POST" action="/courses">
   

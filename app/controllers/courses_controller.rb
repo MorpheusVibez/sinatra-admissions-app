@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/new' do
-      
+      @course = Course.all
         if logged_in?
             erb :'/courses/new'
           else

@@ -31,12 +31,18 @@ class StudentsController < ApplicationController
     post '/login' do
         # binding.pry
         student = Student.find_by(email: params[:email])
-        if student == nil
-            redirect "/signup"
-        else
-            student.authenticate(params[:password])
+        # if student == nil
+        #     redirect "/signup"
+        # else 
+        #     student.authenticate(params[:password])
+        #     session[:user_id] = student.id
+        #     redirect "/students/#{student.id}"
+        # end
+        if student && student.authenticate(params[:password])
             session[:user_id] = student.id
             redirect "/students/#{student.id}"
+        else
+            redirect "/signup"
         end
     end
 

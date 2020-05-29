@@ -1,5 +1,6 @@
 <h2>Welcome, <%= @current_student.name%></h2>
-<h3>Here is are your new classes:</h3>
+<h3><%=@course.name%></h3>
+
 <br>
 
 <%if @course.user_id == @current_student.id%>
@@ -16,6 +17,10 @@
     <p>You Are Not Enrolled!</p>
     
 <%end%>
+<form method="post" action="/courses/<%=@course.id%>">
+    <input id="hidden" type="hidden" name="_method" value="GET">
+  <input type="submit" value="Enroll in Course">
+</form>
 
 <br>
 
