@@ -1,8 +1,8 @@
-class CoursesController < ApplicationController
+class courseController < ApplicationController
 
     get '/courses' do
         if logged_in?
-            @courses = Course.all
+            @course = Course.all
             erb :'/courses/courses'
         else
             redirect to '/login'
@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
     get '/courses/:id' do
       
         if logged_in?
-            @course = Course.find_by_id(params[:id])
+          set_course
             binding.pry
             erb :'courses/show'
         else
@@ -54,8 +54,8 @@ class CoursesController < ApplicationController
     get '/courses/:id/edit' do
       
         if logged_in?
-            @courses = Course.find_by_id(params[:id])
-            if @courses && @courses.user_id == current_student.id
+            set_course
+            if @course && @course.user_id == current_student.id
               erb :'/courses/edit'
             else
               redirect to '/courses'
@@ -67,16 +67,16 @@ class CoursesController < ApplicationController
 
     patch '/courses/:id' do
       if logged_in?
-        @courses = Course.find_by_id(params[:id])
+        set_course
         if params[:name] == "" || params[:description] == ""
-          redirect to "/courses/#{@courses.id}/edit"
+          redirect to "/courses/#{@course.id}/edit"
         else
-          @courses = Course.find_by_id(params[:id])
+          set_course
           # binding.pry
-            if @courses.update(name: params[:name], description: params[:description])
-              redirect to "/courses/#{@courses.id}"
+            if @course.update(name: params[:name], description: params[:description])
+              redirect to "/courses/#{@course.id}"
             else
-              redirect to "/courses/#{@courses.id}/edit"
+              redirect to "/courses/#{@course.id}/edit"
             end
         end
       else
@@ -87,9 +87,9 @@ class CoursesController < ApplicationController
     delete '/courses/:id/delete' do
       binding.pry
       if logged_in?
-        @course = Course.find_by_id(params[:id])
-        if @student == current_student and @courses = @courses
-          @courses.delete
+        set_course
+        if @student == current_student and @course = @course
+          @course.delete
         end
         redirect to '/signup'
       else
