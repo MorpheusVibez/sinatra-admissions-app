@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
             if params == {name: "", description: ""}
               redirect to "/courses/new"
             else
-              
+            
               @course = Course.new(params)
               if @course.save
                 @course.user_id = current_student.id
