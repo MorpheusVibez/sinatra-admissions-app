@@ -1,11 +1,11 @@
 <h2> Edit Course </h2>
 
-<form method="post" action="/courses/<%=@courses.id%>">
+<form method="post" action="/courses/<%=@course.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input type="text" name="name" value="<%=@courses.name%>">
+  <input type="text" name="name" value="<%=@course.name%>">
   <label for="name">Name:</label>
 
-  <input type="text" name="description" value="<%=@courses.description%>">
+  <input type="text" name="description" value="<%=@course.description%>">
   <label for="description">Description:</label>
 
   <input type="submit" value="submit">
