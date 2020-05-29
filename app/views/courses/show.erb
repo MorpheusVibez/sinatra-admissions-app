@@ -1,18 +1,21 @@
 <h2>Welcome, <%= @current_student.name%></h2>
 <h3>Here is are your new classes:</h3>
 <br><br>
-
-
-<%Course.all.each do |c|%>
+<%binding.pry%>
+<%if @course.user_id == @current_student.id%>
+    <%Course.all.each do |c|%>
     <div>
-    <%if c.user_id == @current_student.id%>
+   
         <h4><%=c.name%></h4>
     <br>
         <p><%=c.description%></p>
+    <%else%>
+        <h5>You are not enrolled</h5>
+    <%end%>
     <%end%>
     </div>
 <%end%>
 
 <br>
-<%binding.pry%>
+
 <a href="/courses/<%=@course.id%>/edit">Edit Course</a>

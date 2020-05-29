@@ -44,7 +44,6 @@ class CoursesController < ApplicationController
       
         if logged_in?
           set_course
-            binding.pry
             erb :'courses/show'
         else
             redirect to '/login'
@@ -52,10 +51,11 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/:id/edit' do
-      
+        set_course
+        binding.pry
         if logged_in?
-            set_course
-            if @course && @course.user_id == current_student.id
+            if @course.user_id == current_student.id
+             
               erb :'/courses/edit'
             else
               redirect to '/courses'
@@ -100,6 +100,6 @@ class CoursesController < ApplicationController
     private
     
     def set_course
-      @course = Course.find_by_id(params[:id])
+      @course = Course.find(params[:id])
   end
 end
