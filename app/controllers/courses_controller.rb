@@ -44,6 +44,7 @@ class CoursesController < ApplicationController
       
         if logged_in?
             @course = Course.find_by_id(params[:id])
+            binding.pry
             erb :'courses/show'
         else
             redirect to '/login'
@@ -86,7 +87,7 @@ class CoursesController < ApplicationController
     delete '/courses/:id/delete' do
       binding.pry
       if logged_in?
-        @courses = Course.find_by_id(params[:id])
+        @course = Course.find_by_id(params[:id])
         if @student == current_student and @courses = @courses
           @courses.delete
         end
@@ -95,4 +96,10 @@ class CoursesController < ApplicationController
         redirect to '/login'
       end
     end
+
+    private
+    
+    def set_course
+      @course = Course.find_by_id(params[:id])
+  end
 end
