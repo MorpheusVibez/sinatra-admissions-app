@@ -1,6 +1,6 @@
 <h2>Welcome, <%= @current_student.name%></h2>
-<h3>Profile Info:</h3>
-
+<h3>Profile Info</h3>
+<br>
     <ol>
         <h4>Name:</h4>
         <%=@student.name%>
@@ -20,7 +20,7 @@
     </ol>
 
 <br> <br>
-<a href="/courses">Courses</a>
+<a href="/courses">Show Available Courses</a>
 <br> <br>
 <a href="/students/<%=@student.id%>/edit">Edit Profile</a>
 <br> <br>
