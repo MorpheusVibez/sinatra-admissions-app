@@ -6,6 +6,7 @@
 <%if @course.user_id == @current_student.id%>
     <div>
         <p><%=@course.description%></p>
+        <h4>You Are Enrolled!</h4>
 <%else%>
     <p>You Are Not Enrolled!</p>
 
