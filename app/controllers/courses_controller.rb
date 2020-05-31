@@ -24,7 +24,6 @@ class CoursesController < ApplicationController
             if params == {name: "", description: ""}
               redirect to "/courses/new"
             else
-              binding.pry
               @course = set_course
               if @course.save
                 @course.user_id = current_student.id
@@ -100,6 +99,6 @@ class CoursesController < ApplicationController
     private
     
     def set_course
-      @course = Course.find_or_create_by(params[:id])
+      @course = Course.find(params[:id])
   end
 end
