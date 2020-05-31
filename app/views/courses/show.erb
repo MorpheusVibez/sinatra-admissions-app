@@ -16,10 +16,13 @@
 
     <p>You Are Not Enrolled!</p>
     
+   
 <%end%>
-<form method="post" action="/courses/<%=@course.id%>">
-    <input id="hidden" type="hidden" name="_method" value="GET">
+<form method="POST" action="/courses">
+<%# <%binding.pry%>
+    <input id="<%@course.id%>" type="hidden" name="id" value="<%=@course.id%>">
   <input type="submit" value="Enroll in Course">
+  
 </form>
 
 <br>
