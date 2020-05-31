@@ -24,13 +24,15 @@ class CoursesController < ApplicationController
             if params == {name: "", description: ""}
               redirect to "/courses/new"
             else
-              @course = set_course
-              if @course.save
+              @course = Course.find_or_create_by(params)
+              if @course.user_id == nil
+              # @course.save
                 @course.user_id = current_student.id
                 @course.save
                 redirect to "/courses/#{@course.id}"
               else
                 redirect to "/students/#{@course.user_id}"
+              
               end
             end 
           else
