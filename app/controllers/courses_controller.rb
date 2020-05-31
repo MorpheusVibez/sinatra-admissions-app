@@ -93,7 +93,7 @@ class CoursesController < ApplicationController
         end
         redirect to '/courses'
       else
-        redirect to '/login'
+        redirect to '/'
       end
     end
 
