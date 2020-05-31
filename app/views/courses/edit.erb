@@ -2,13 +2,19 @@
 
 <form method="post" action="/courses/<%=@course.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input type="text" name="name" value="<%=@course.name%>">
-  <label for="name">Name:</label>
 
-  <input type="text" name="description" value="<%=@course.description%>">
+  <label for="name">Name:</label>
+  <input type="text" name="name" value="<%=@course.name%>">
+  
   <label for="description">Description:</label>
+  <input type="text" name="description" value="<%=@course.description%>">
 
   <input type="submit" value="submit">
+</form>
+
+<form method="post" action="/courses/<%=@course.id%>">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <h3> <input type="submit" value="DELETE"> </h3>
 </form>
 
 <br>

@@ -85,14 +85,13 @@ class CoursesController < ApplicationController
       end
     end
 
-    delete '/courses/:id/delete' do
-      binding.pry
+    delete '/courses/:id' do
       if logged_in?
         set_course
-        if @student == current_student and @course = @course
-          @course.delete
+        if set_course.user_id == current_student.id
+          set_course.delete
         end
-        redirect to '/signup'
+        redirect to '/courses'
       else
         redirect to '/login'
       end
