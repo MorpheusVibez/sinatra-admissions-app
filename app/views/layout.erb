@@ -15,12 +15,17 @@
   </head>
   <body>
     <div class="nav">
-
-      <a href="/">Home</a>
+      <%if logged_in?%>
+      <a href="/students/<%=@current_student.id%>">Profile</a>
 
       <a href="/courses">Courses</a>
 
       <a href="/logout">Logout</a>
+      <%else%>
+      <a href="/">Home</a>
+
+      <%end%>
+
     </div>
     
     <div class="wrapper">
