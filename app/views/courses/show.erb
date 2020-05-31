@@ -5,32 +5,24 @@
 
 <%if @course.user_id == @current_student.id%>
     <div>
-    <%Course.all.each do |c|%>
-    <%if c.user_id == @current_student.id %>
-        <h4><%=c.name%></h4>
-   
-        <p><%=c.description%></p>
-       <%end%> 
-    <%end%>
+        <p><%=@course.description%></p>
 <%else%>
-
     <p>You Are Not Enrolled!</p>
-    
-   
-<%end%>
-<form method="POST" action="/courses">
-<%# <%binding.pry%>
-    <input id="<%@course.id%>" type="hidden" name="id" value="<%=@course.id%>">
-  <input type="submit" value="Enroll in Course">
-  
-</form>
 
 <br>
 
-<a href="/courses">Show All Courses</a>
+<form method="POST" action="/courses">
+    <input id="<%@course.id%>" type="hidden" name="id" value="<%=@course.id%>">
+    <input type="submit" value="Enroll in Course">
+</form>
+<%end%>
+
+<br>
+
+<a href="/courses/<%=@course.id%>/edit">Edit Course</a>
 <br>
 <a href="/courses/new">Add New Course</a> 
 <br>
-<a href="/courses/<%=@course.id%>/edit">Edit Course</a>
+<a href="/courses">Show All Courses</a>
 <br>
-<a href="/students/<%=@current_student.id%>">See Profile</a>
+<a href="/students/<%=@current_student.id%>">Profile</a>
