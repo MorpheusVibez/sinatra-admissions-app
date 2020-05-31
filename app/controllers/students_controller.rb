@@ -24,7 +24,7 @@ class StudentsController < ApplicationController
         if !logged_in?
             erb :'/students/login'
         else 
-            redirect "/courses"
+            redirect "/students/#{current_student.id}"
         end
     end
 
