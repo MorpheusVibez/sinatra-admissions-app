@@ -3,10 +3,11 @@
 
 <br>
 
-<%if @course.user_id == @current_student.id%>
+<%if @course.student_id == @current_student.id%>
     <div>
         <p><%=@course.description%></p>
         <h4>You Are Enrolled!</h4>
+        <p>Created By: <%=@current_student.name%>
 <%else%>
     <p>You Are Not Enrolled!</p>
 
@@ -18,7 +19,7 @@
 </form>
 <%end%>
 
-<br>
+<br><br>
 
 <a href="/courses/<%=@course.id%>/edit">Edit Course</a>
 <br>

@@ -96,13 +96,13 @@ class StudentsController < ApplicationController
         end
     end
 
-    delete '/students/:id/delete' do
+    delete '/students/:id' do
         if logged_in?
             set_student
-            if @student == current_student
-              @student.delete
+            if set_student.id == current_student.id
+              set_student.delete
             end
-            redirect to '/signup'
+            redirect to '/'
           else
             redirect to '/login'
           end

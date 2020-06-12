@@ -7,7 +7,7 @@
 
 <ol>
 <%@course.each do |c|%>
-   <%if c.user_id == nil%>
+   <%if c.student_id == nil%>
     <div>
         <a href="/courses/<%=c.id%>"><%=c.name%></a>
         <%else%>

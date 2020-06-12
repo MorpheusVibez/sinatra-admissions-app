@@ -11,7 +11,7 @@
         <h4>Classes:</h4>
         <%Course.all.each do |c|%>
     <div>
-    <%if c.user_id == @current_student.id%>
+    <%if c.student_id == @current_student.id%>
         <a href="/courses/<%=c.id%>"><%=c.name%></a>
 
     <%end%>

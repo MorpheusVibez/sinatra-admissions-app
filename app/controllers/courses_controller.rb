@@ -25,24 +25,20 @@ class CoursesController < ApplicationController
               redirect to "/courses/new"
             else
               @course = Course.find_or_create_by(params)
-              if @course.user_id == nil
-              # @course.save
-                @course.user_id = current_student.id
-                @course.save
-                redirect to "/courses/#{@course.id}"
+              if @course.student_id == nil
+                 @course.student_id = current_student.id
+                 @course.save
+                 redirect to "/courses/#{@course.id}"
               else
-                redirect to "/students/#{@course.user_id}"
-              
+                redirect to "/students/#{@course.student_id}"
               end
             end 
           else
             redirect to '/login'
-          end
-        
+          end     
     end
 
-    get '/courses/:id' do
-      
+    get '/courses/:id' do  
         if logged_in?
           set_course
             erb :'courses/show'
@@ -55,25 +51,20 @@ class CoursesController < ApplicationController
         set_course
         # binding.pry
         if logged_in?
-            if @course.user_id == current_student.id
-             
+            creation_check
               erb :'/courses/edit'
-            else
-              redirect to '/courses'
-            end
-          else
+        else
             redirect to '/login'
-          end
+        end
     end
 
     patch '/courses/:id' do
       if logged_in?
         set_course
+        creation_check
         if params[:name] == "" || params[:description] == ""
           redirect to "/courses/#{@course.id}/edit"
         else
-          set_course
-          # binding.pry
             if @course.update(name: params[:name], description: params[:description])
               redirect to "/courses/#{@course.id}"
             else
@@ -88,7 +79,7 @@ class CoursesController < ApplicationController
     delete '/courses/:id' do
       if logged_in?
         set_course
-        if set_course.user_id == current_student.id
+        if set_course.student_id == current_student.id
           set_course.delete
         end
         redirect to '/courses'
@@ -101,5 +92,6 @@ class CoursesController < ApplicationController
     
     def set_course
       @course = Course.find(params[:id])
-  end
+    end
+
 end

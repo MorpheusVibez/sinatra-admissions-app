@@ -27,7 +27,14 @@ class ApplicationController < Sinatra::Base
     def logout
       session.clear
       redirect to '/login'
-    end 
+    end
+    
+    def creation_check
+      if @course.student_id != @current_student.id
+        redirect to "/courses/#{@course.id}"
+      end
+    end
+    
   end 
 
 end
